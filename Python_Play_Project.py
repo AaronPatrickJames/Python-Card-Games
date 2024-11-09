@@ -3,12 +3,12 @@ import random
 
 
 def main():
-    PlayBlackJack()
+    PlayBlackJack(6)
    
     
-def PlayBlackJack():
-    current_game = BlackJack()
-    current_game.TwoDeck()
+def PlayBlackJack(decks):
+    current_game = BlackJack(decks)
+    current_game.GenerateDeck()
     current_game.my_deck.ShowDeck()
     x = len(current_game.my_deck.deck)
     print(str(x))
@@ -18,7 +18,8 @@ def PlayBlackJack():
 #Game Object
 class BlackJack:
     
-    def __init__(self):
+    def __init__(self, deck_count):
+        self.deck_count = deck_count
         self.card_dict = {
             "Ace": [1,11],
             "Two": [2],
@@ -49,28 +50,11 @@ class BlackJack:
         self.my_deck.ShuffleDeck()
         
 
-    def OneDeck(self):
-        #Deck Object
-        self.my_deck = Deck()
-
-        #one deck
-        for name in self.card_dict:
-            for suit in self.suit_list:
-                pass
-                #Card Object
-                card = Card(suit, self.card_dict[name], name)
-                #Insert Card into Deck
-                self.my_deck.AddToDeck(card)
-        
-        #Shuffle the deck
-        self.ShuffleMyDeck()     
-            
-
-    def TwoDeck(self):
+    def GenerateDeck(self):
         #Deck Object
         self.my_deck = Deck()
         #two decks
-        for i in range(2):
+        for i in range(self.deck_count):
             for name in self.card_dict:
                 for suit in self.suit_list:
                     pass
@@ -81,15 +65,7 @@ class BlackJack:
                     
         #Shuffle the deck
         self.ShuffleMyDeck()    
-        
-    def FourDeck(self):
-        pass
     
-    def SixDeck(self):
-        pass
-    
-    def EightDeck(self):
-        pass
      
         
 #Deck Object
